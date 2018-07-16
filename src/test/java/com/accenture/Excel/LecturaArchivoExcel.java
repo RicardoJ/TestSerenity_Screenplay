@@ -15,7 +15,7 @@ import com.accenture.dato.Dato;
 
 
 public class LecturaArchivoExcel {
-	static String nombreArchivo = "datosExcel.xlsx";
+	static String nombreArchivo = "datos.xlsx";
 	static String rutaArchivo = "C:\\Users\\ricardo.diaz\\Documents\\" + nombreArchivo;
 	String hoja = "Hoja1";
 

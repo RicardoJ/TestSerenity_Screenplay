@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
-import com.accenture.tasks.UserGmail;
-import com.accenture.ui.Boton_Redactar;
+import com.accenture.tasks.LoginGmail;
+import com.accenture.ui.viewGmail;
 
 import cucumber.api.Result;
 
@@ -22,15 +22,14 @@ import com.accenture.Excel.LecturaArchivoExcel;
 
 import com.accenture.dato.Dato;
 import com.accenture.questions.TheResult;
-import com.accenture.tasks.ClickSendMessage;
+
 import com.accenture.tasks.OpenTheApplication;
-import com.accenture.tasks.Open_boton_redactar;
+
 import com.accenture.tasks.Open_enviados;
-import com.accenture.tasks.PassGmail;
+
 import com.accenture.tasks.Search;
-import com.accenture.tasks.SendKeysDescription;
-import com.accenture.tasks.SendKeysSubject;
-import com.accenture.tasks.SendKeysTo;
+
+import com.accenture.tasks.SendEmail;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.EventualConsequence.eventually;
@@ -56,12 +55,9 @@ public class SearchByKeywordStory {
     @Steps
     OpenTheApplication openTheApplication;
     
-    @Steps
-    Open_boton_redactar open_boton_redactar;
+  
     
-    @Steps
-    ClickSendMessage clickSendMessage;
-    
+ 
     @Steps
     Open_enviados clickEnviados;
 
@@ -78,21 +74,15 @@ public class SearchByKeywordStory {
 
         
         	
-        	 when(anna).attemptsTo(UserGmail.forTheTerm(rb.getString("user"))); //accion
+        when(anna).attemptsTo(LoginGmail.forTheTerm(rb.getString("user"),rb.getString("password"))); //accion
              
-             and(anna).attemptsTo(PassGmail.forTheTerm(rb.getString("password")));
-        	
-        
-       
+
         
         for (Dato informacion :lectura.leer()) {
-        and(anna).wasAbleTo(open_boton_redactar);
-        and(anna).attemptsTo(SendKeysTo.forTheTerm(informacion.getCorreo()));
-        and(anna).attemptsTo(SendKeysSubject.forTheTerm(informacion.getAsunto()));
-        and(anna).attemptsTo(SendKeysDescription.forTheTerm(informacion.getDescripcion()));
-        and(anna).wasAbleTo(clickSendMessage);
+        
+        and(anna).attemptsTo(SendEmail.forTheTerm(informacion.getCorreo(),informacion.getAsunto(), informacion.getDescripcion()));
         }
-        and(anna).wasAbleTo(clickEnviados);
+        and(anna).attemptsTo(clickEnviados);
         
         then(anna).should(seeThat(TheResult.is(), containsString("selenium y serenity")));//resultado
 //GoTo.theElement

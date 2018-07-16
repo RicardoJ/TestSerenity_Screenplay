@@ -1,7 +1,7 @@
 package com.accenture.tasks;
 
-import com.accenture.ui.Boton_Redactar;
-import com.accenture.ui.Enviados;
+import com.accenture.ui.viewGmail;
+
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -12,7 +12,7 @@ public class Open_enviados implements Task{
 	 @Step("click Enviadosr")
 	   public <T extends Actor> void performAs(T actor) {
 	       actor.wasAbleTo(
-	               Click.on(Enviados.ENVIADOS_BTN)
+	               Click.on(viewGmail.ENVIADOS_BTN)
 	       );
 	   }
 }
